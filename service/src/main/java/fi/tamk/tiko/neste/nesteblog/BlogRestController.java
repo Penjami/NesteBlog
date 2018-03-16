@@ -16,6 +16,7 @@ public class BlogRestController {
 
     @PostConstruct
     public void init() {
+        addBlogPost(new BlogPost("joe", "jejjee"));
     }
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
@@ -39,6 +40,4 @@ public class BlogRestController {
         blogPostRepository.save(blogPost);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
-
-
 }

@@ -1,9 +1,9 @@
 package fi.tamk.tiko.neste.nesteblog;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
 @Table(name = "blogposts")
@@ -13,17 +13,20 @@ public class BlogPost {
     private long id;
     private String author;
     private String content;
-    private String postDate;
-    private String updateDate;
+    @Column(name="timestamp", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalTime postDate;
+    private LocalTime updateDate;
+    private ArrayList<String> comments;
+    private int likes;
 
     public BlogPost() {
+        comments = new ArrayList<>();
     }
 
-    public BlogPost(String author, String content, String postDate, String updateDate) {
+    public BlogPost(String author, String content) {
+        comments = new ArrayList<>();
         this.author = author;
         this.content = content;
-        this.postDate = postDate;
-        this.updateDate = updateDate;
     }
 
     public long getId() {
@@ -50,19 +53,46 @@ public class BlogPost {
         this.content = content;
     }
 
-    public String getPostDate() {
+    public LocalTime getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(String postDate) {
+    public void setPostDate(LocalTime postDate) {
         this.postDate = postDate;
     }
 
-    public String getUpdateDate() {
+    public LocalTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(LocalTime updateDate) {
         this.updateDate = updateDate;
     }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> comments) {
+        this.comments = comments;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        setPostDate(LocalTime.now());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        setUpdateDate(LocalTime.now());
+    }
+
 }
