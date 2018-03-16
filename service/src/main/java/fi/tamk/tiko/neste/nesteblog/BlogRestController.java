@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -16,7 +17,7 @@ public class BlogRestController {
 
     @PostConstruct
     public void init() {
-        addBlogPost(new BlogPost("joe", "jejjee"));
+        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
     }
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
@@ -25,14 +26,29 @@ public class BlogRestController {
     }
 
     @RequestMapping(value = "/blogposts/{blogPostID}", method = RequestMethod.GET)
-    public Optional<BlogPost> getBlogPost(@PathVariable long blogPostID) {
-        return blogPostRepository.findById(blogPostID);
+    public BlogPost getBlogPost(@PathVariable long blogPostID) {
+        return blogPostRepository.findById(blogPostID).orElseThrow(() -> new CannotFindBlogPostException(blogPostID));
     }
 
     @RequestMapping(value = "/blogposts/{blogPostID}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteBlogPost(@PathVariable long blogPostID) {
-        blogPostRepository.deleteById(blogPostID);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        BlogPost post = blogPostRepository.findById
+                (blogPostID).orElseThrow(() -> new CannotFindBlogPostException(blogPostID));
+        blogPostRepository.delete(post);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/blogposts/{id}")
+    public BlogPost updateBlogPost(@PathVariable(value = "id") Long blogPostID,
+                           @Valid @RequestBody BlogPost blogPostDetails) {
+
+        BlogPost newBlogPost = blogPostRepository.findById(blogPostID)
+                .orElseThrow(() -> new CannotFindBlogPostException(blogPostID));
+
+        newBlogPost.setTitle(blogPostDetails.getTitle());
+        newBlogPost.setContent(blogPostDetails.getContent());
+
+        return blogPostRepository.save(newBlogPost);
     }
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.POST)

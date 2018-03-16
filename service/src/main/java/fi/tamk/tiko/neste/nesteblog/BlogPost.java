@@ -2,9 +2,7 @@ package fi.tamk.tiko.neste.nesteblog;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 @Table(name = "blogposts")
@@ -13,8 +11,9 @@ public class BlogPost {
     @GeneratedValue
     private long id;
     private String author;
+    private String title;
     private String content;
-    private LocalDate postDate;
+    private LocalDate createDate;
     private LocalDate updateDate;
     private ArrayList<String> comments;
     private int likes;
@@ -23,10 +22,11 @@ public class BlogPost {
         comments = new ArrayList<>();
     }
 
-    public BlogPost(String author, String content) {
+    public BlogPost(String author, String content, String title) {
         comments = new ArrayList<>();
         this.author = author;
         this.content = content;
+        this.title = title;
     }
 
     public long getId() {
@@ -53,12 +53,20 @@ public class BlogPost {
         this.content = content;
     }
 
-    public LocalDate getPostDate() {
-        return postDate;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPostDate(LocalDate postDate) {
-        this.postDate = postDate;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 
     public LocalDate getUpdateDate() {
@@ -87,7 +95,7 @@ public class BlogPost {
 
     @PrePersist
     protected void onCreate() {
-        setPostDate(LocalDate.now());
+        setCreateDate(LocalDate.now());
         setUpdateDate(LocalDate.now());
     }
 
