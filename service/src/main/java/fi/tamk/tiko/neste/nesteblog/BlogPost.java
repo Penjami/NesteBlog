@@ -1,6 +1,7 @@
 package fi.tamk.tiko.neste.nesteblog;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,9 +14,8 @@ public class BlogPost {
     private long id;
     private String author;
     private String content;
-    @Column(name="timestamp", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalTime postDate;
-    private LocalTime updateDate;
+    private LocalDate postDate;
+    private LocalDate updateDate;
     private ArrayList<String> comments;
     private int likes;
 
@@ -53,19 +53,19 @@ public class BlogPost {
         this.content = content;
     }
 
-    public LocalTime getPostDate() {
+    public LocalDate getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(LocalTime postDate) {
+    public void setPostDate(LocalDate postDate) {
         this.postDate = postDate;
     }
 
-    public LocalTime getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalTime updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -87,12 +87,13 @@ public class BlogPost {
 
     @PrePersist
     protected void onCreate() {
-        setPostDate(LocalTime.now());
+        setPostDate(LocalDate.now());
+        setUpdateDate(LocalDate.now());
     }
 
     @PreUpdate
     protected void onUpdate() {
-        setUpdateDate(LocalTime.now());
+        setUpdateDate(LocalDate.now());
     }
 
 }
