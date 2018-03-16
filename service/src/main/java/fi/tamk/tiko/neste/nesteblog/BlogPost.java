@@ -19,8 +19,11 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(String author) {
+    public BlogPost(String author, String content, String postDate, String updateDate) {
         this.author = author;
+        this.content = content;
+        this.postDate = postDate;
+        this.updateDate = updateDate;
     }
 
     public long getId() {
@@ -37,5 +40,29 @@ public class BlogPost {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(String postDate) {
+        this.postDate = postDate;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
     }
 }
