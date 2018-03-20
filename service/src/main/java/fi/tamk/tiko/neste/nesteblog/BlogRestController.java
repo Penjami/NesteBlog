@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 public class BlogRestController {
