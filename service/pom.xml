@@ -8,7 +8,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<author>nesteblog</author>
 	<description>Backend for a blog</description>
 
 	<parent>
@@ -51,7 +50,7 @@
 			<artifactId>derby</artifactId>
 			<version>10.8.3.0</version>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

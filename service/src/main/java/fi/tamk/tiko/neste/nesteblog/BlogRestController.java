@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 public class BlogRestController {
@@ -51,7 +50,7 @@ public class BlogRestController {
         return blogPostRepository.save(newBlogPost);
     }
 
-    @RequestMapping(value = "/blogposts", method = RequestMethod.POST)
+    @PutMapping(value = "/blogposts")
     public ResponseEntity<Void> addBlogPost(@RequestBody BlogPost blogPost) {
         blogPostRepository.save(blogPost);
         return new ResponseEntity<Void>(HttpStatus.CREATED);

@@ -1,20 +1,64 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {blogPosts: []};
+    }
+
+      componentDidMount() {
+        this.loadBlogpostsFromDB();
+      }
+
+      // Load students from database
+      loadBlogpostsFromDB() {
+        fetch(`/blogposts`, {
+            accept: 'application/json',
+          }).then((response) => {
+          return response.json();
+          }).then(response => {
+          this.setState({blogPosts: response});
+        });
+      }
+
+  render() {
+        return (
+            <BlogPostList blogPosts={this.state.blogPosts}/>
+        )
+    }
+}
+
+class BlogPostList extends React.Component{
+  render() {
+    let blogPosts = this.props.blogPosts.map(blogPost =>
+      <BlogPost blogPost={blogPost}/>
+    );
+    return (
+      <table>
+        <tbody>
+        <tr>
+          <th>Author</th>
+          <th>Title</th>
+          <th>Content</th>
+        </tr>
+        {blogPosts}
+        </tbody>
+      </table>
+    )
+  }
+}
+
+class BlogPost extends React.Component{
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <tr>
+        <td>{this.props.blogPost.author}</td>
+        <td>{this.props.blogPost.title}</td>
+        <td>{this.props.blogPost.content}</td>
+      </tr>
+    )
   }
 }
 
