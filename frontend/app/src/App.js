@@ -25,7 +25,16 @@ class App extends Component {
 
   render() {
         return (
-            <BlogPostList blogPosts={this.state.blogPosts}/>
+            <page>
+              <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">About</a></li>
+                <input type="text" placeholder="Search.."></input>
+              </ul>
+              <BlogPostList blogPosts={this.state.blogPosts}/>
+              <footer></footer>
+            </page>
         )
     }
 }
@@ -36,28 +45,22 @@ class BlogPostList extends React.Component{
       <BlogPost blogPost={blogPost}/>
     );
     return (
-      <table>
-        <tbody>
-        <tr>
-          <th>Author</th>
-          <th>Title</th>
-          <th>Content</th>
-        </tr>
+      <div>
         {blogPosts}
-        </tbody>
-      </table>
+      </div>
     )
   }
 }
 
 class BlogPost extends React.Component{
+
   render() {
     return (
-      <tr>
-        <td>{this.props.blogPost.author}</td>
-        <td>{this.props.blogPost.title}</td>
-        <td>{this.props.blogPost.content}</td>
-      </tr>
+      <div className="blogPost" >
+        <h2 className="title" >{this.props.blogPost.title}</h2>
+        <p className="content" >{this.props.blogPost.content}</p>
+        <p className="author" >{this.props.blogPost.author}</p>
+      </div>
     )
   }
 }

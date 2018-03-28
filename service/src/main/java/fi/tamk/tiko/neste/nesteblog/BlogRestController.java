@@ -17,6 +17,11 @@ public class BlogRestController {
     @PostConstruct
     public void init() {
         addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
+        addBlogPost(new BlogPost("joe", "asdasfq2r ", "jeeee"));
+        addBlogPost(new BlogPost("joe", "f  2e sd a", "jeeee"));
+        addBlogPost(new BlogPost("joe", "24 asd q2e asd", "jeeee"));
+        addBlogPost(new BlogPost("joe", "235 asd q ", "jeeee"));
+
     }
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
