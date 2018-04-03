@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8080",
   "homepage": "/app/build",
   "dependencies": {
+    "npm": "^5.8.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"

@@ -21,6 +21,12 @@ public class BlogRestController {
         addBlogPost(new BlogPost("joe", "f  2e sd a", "jeeee"));
         addBlogPost(new BlogPost("joe", "24 asd q2e asd", "jeeee"));
         addBlogPost(new BlogPost("joe", "235 asd q ", "jeeee"));
+        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
+        addBlogPost(new BlogPost("joe", "1241", "jeeee"));
+        addBlogPost(new BlogPost("joe", "qwe", "jeeee"));
+        addBlogPost(new BlogPost("joe", "saf", "jeeee"));
+        addBlogPost(new BlogPost("joe", "cxaw", "jeeee"));
+        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
 
     }
 

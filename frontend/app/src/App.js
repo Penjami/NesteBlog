@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
@@ -8,10 +8,15 @@ class App extends Component {
     this.state = {blogPosts: []};
     this.onDelete = this.onDelete.bind(this);
     this.loadBlogpostsFromDB = this.loadBlogpostsFromDB.bind(this);
+	  this.switchToDifferentPage = this.switchToDifferentPage.bind(this);
+	  this.handleBlogSubmit = this.handleBlogSubmit.bind(this);
+	  this.renderNewBlogPost = this.renderNewBlogPost.bind(this);
+	  this.renderPage = this.renderPage.bind(this)
+	  this.state = {blogPosts: [], pageState: 'HOME',
+		  pageStates: ['HOME', 'NEWPOST', 'ABOUT']};
   }
 
   onDelete(blogPost) {
-    // this.setState({blogPosts: this.state.blogPosts.splice(blogPost.id - 1, 1)});
     this.deleteBlogPost(blogPost.id);
   }
 
@@ -50,6 +55,98 @@ class App extends Component {
             </page>
         )
     }
+	handleBlogSubmit(event) {
+		const data = new FormData(event.target);
+
+		fetch('/blogposts/', {
+			method: 'POST',
+			body: data,
+		});
+	}
+
+	switchToDifferentPage(page) {
+		this.setState({pageState: page})
+	}
+
+	renderHome() {
+		return (
+			<page>
+				<ul>
+					<li><button onClick={this.switchToDifferentPage(this.state.pageStates[0])}>Home</button></li>
+					<li><a>Contact</a></li>
+					<li><a>About</a></li>
+					<li><button onClick={this.switchToDifferentPage(this.state.pageStates[1])}>Create New Blog Post</button></li>
+					<input type="text" placeholder="Search.."></input>
+				</ul>
+				<BlogPostList blogPosts={this.state.blogPosts}/>
+				<footer></footer>
+			</page>
+		)
+	}
+
+	renderNewBlogPost() {
+		return (
+			<page>
+				<ul>
+					<li><a>Home</a></li>
+					<li><a>Contact</a></li>
+					<li><a>About</a></li>
+					<li><a onClick={this.switchToDifferentPage}>Add New Blog Post</a></li>
+					<input type="text" placeholder="Search.."></input>
+				</ul>
+				<form onSubmit={this.handleBlogSubmit}>
+					<input type='text' name='author' />
+					<input type='text' name='title' />
+					<input type='text' name='content' />
+				</form>
+				<footer></footer>
+			</page>
+		)
+	}
+
+	renderAbout() {
+		return (
+			<page>
+				<ul>
+					<li><a href="" onClick={this.switchToDifferentPage(this.state.pageStates[0])}>Home</a></li>
+					<li><a>Contact</a></li>
+					<li><a>About</a></li>
+					<li><a href="" onClick={this.switchToDifferentPage(this.state.pageStates[1])}>Add New Blog Post</a></li>
+					<input type="text" placeholder="Search.."></input>
+				</ul>
+				<BlogPostList blogPosts={this.state.blogPosts}/>
+				<footer></footer>
+			</page>
+		)
+	}
+
+	renderPage() {
+		if (this.state.pageState == this.state.pageStates[0]) {
+			return this.renderHome();
+		} else if (this.state.pageState == this.state.pageStates[1]){
+			return this.renderNewBlogPost();
+		} else {
+			return this.renderAbout();
+		}
+	}
+
+	render() {
+
+		return (
+			<page>
+				<ul>
+					<li><a href="">Home</a></li>
+					<li><a>Contact</a></li>
+					<li><a>About</a></li>
+					<li><a href="">Create New Blog Post</a></li>
+					<input type="text" placeholder="Search.."></input>
+				</ul>
+				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
+				<footer></footer>
+			</page>
+		)
+		//return this.renderPage();
+	}
 }
 
 class BlogPostList extends React.Component{
@@ -65,7 +162,7 @@ class BlogPostList extends React.Component{
   }
 }
 
-class BlogPost extends React.Component{
+class BlogPost extends React.Component {
 
   constructor(props) {
     super(props);
