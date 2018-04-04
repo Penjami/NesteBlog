@@ -40,7 +40,7 @@ class App extends Component {
       return response.json();
       }).then(response => {
       this.setState({blogPosts: response});
-    });
+    }).then(this.loadBlogpostsFromDB);;
   }
 
 	handleBlogSubmit(event) {
@@ -55,7 +55,9 @@ class App extends Component {
         author: this.state.author,
         content: this.state.content,
         title: this.state.title
-		})}).then(this.switchToHome);
+		})}).then((result)=> {
+		  console.log(result);
+    }).then(this.switchToHome);
 
 	}
 
