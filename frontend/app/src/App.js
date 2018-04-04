@@ -8,7 +8,8 @@ class App extends Component {
     this.state = {blogPosts: []};
     this.onDelete = this.onDelete.bind(this);
     this.loadBlogpostsFromDB = this.loadBlogpostsFromDB.bind(this);
-	  this.switchToDifferentPage = this.switchToDifferentPage.bind(this);
+	  this.switchToNewBlog = this.switchToNewBlog.bind(this);
+    this.switchToHome = this.switchToHome.bind(this);
 	  this.handleBlogSubmit = this.handleBlogSubmit.bind(this);
 	  this.renderNewBlogPost = this.renderNewBlogPost.bind(this);
 	  this.renderPage = this.renderPage.bind(this)
@@ -41,20 +42,6 @@ class App extends Component {
     });
   }
 
-  render() {
-        return (
-            <page>
-              <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">About</a></li>
-                <input type="text" placeholder="Search.."></input>
-              </ul>
-              <BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
-              <footer></footer>
-            </page>
-        )
-    }
 	handleBlogSubmit(event) {
 		const data = new FormData(event.target);
 
@@ -64,19 +51,23 @@ class App extends Component {
 		});
 	}
 
-	switchToDifferentPage(page) {
-		this.setState({pageState: page})
+	switchToNewBlog() {
+		this.setState({pageState: this.state.pageStates[1]})
 	}
+
+	switchToHome() {
+    this.setState({pageState: this.state.pageStates[0]})
+  }
 
 	renderHome() {
 		return (
 			<page>
 				<ul>
-					<li><button onClick={this.switchToDifferentPage(this.state.pageStates[0])}>Home</button></li>
+					<li><a onClick={this.switchToHome}>Home</a></li>
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
-					<li><button onClick={this.switchToDifferentPage(this.state.pageStates[1])}>Create New Blog Post</button></li>
-					<input type="text" placeholder="Search.."></input>
+					<li><a onClick={this.switchToNewBlog}>Create New Blog Post</a></li>
+					<input type="text" placeholder="Search.."/>
 				</ul>
 				<BlogPostList blogPosts={this.state.blogPosts}/>
 				<footer></footer>
@@ -88,11 +79,11 @@ class App extends Component {
 		return (
 			<page>
 				<ul>
-					<li><a>Home</a></li>
+					<li><a onClick={this.switchToHome}>Home</a></li>
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
-					<li><a onClick={this.switchToDifferentPage}>Add New Blog Post</a></li>
-					<input type="text" placeholder="Search.."></input>
+					<li><a onClick={this.switchToNewBlog}>Create New Blog Post</a></li>
+					<input type="text" placeholder="Search.."/>
 				</ul>
 				<form onSubmit={this.handleBlogSubmit}>
 					<input type='text' name='author' />
@@ -108,11 +99,11 @@ class App extends Component {
 		return (
 			<page>
 				<ul>
-					<li><a href="" onClick={this.switchToDifferentPage(this.state.pageStates[0])}>Home</a></li>
+					<li><a href="" onClick={this.switchToHome}>Home</a></li>
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
-					<li><a href="" onClick={this.switchToDifferentPage(this.state.pageStates[1])}>Add New Blog Post</a></li>
-					<input type="text" placeholder="Search.."></input>
+					<li><a href="" onClick={this.switchToNewBlog}>Add New Blog Post</a></li>
+					<input type="text" placeholder="Search.."/>
 				</ul>
 				<BlogPostList blogPosts={this.state.blogPosts}/>
 				<footer></footer>
@@ -121,9 +112,9 @@ class App extends Component {
 	}
 
 	renderPage() {
-		if (this.state.pageState == this.state.pageStates[0]) {
+		if (this.state.pageState === this.state.pageStates[0]) {
 			return this.renderHome();
-		} else if (this.state.pageState == this.state.pageStates[1]){
+		} else if (this.state.pageState === this.state.pageStates[1]){
 			return this.renderNewBlogPost();
 		} else {
 			return this.renderAbout();
@@ -131,7 +122,7 @@ class App extends Component {
 	}
 
 	render() {
-
+		/*
 		return (
 			<page>
 				<ul>
@@ -144,8 +135,8 @@ class App extends Component {
 				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
 				<footer></footer>
 			</page>
-		)
-		//return this.renderPage();
+		)*/
+		return this.renderPage();
 	}
 }
 
