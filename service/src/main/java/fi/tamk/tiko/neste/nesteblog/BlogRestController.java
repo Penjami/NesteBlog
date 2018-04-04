@@ -48,7 +48,7 @@ public class BlogRestController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/blogposts/{id}")
+    @PostMapping("/blogposts/{id}")
     public BlogPost updateBlogPost(@PathVariable(value = "id") Long blogPostID,
                            @Valid @RequestBody BlogPost blogPostDetails) {
 
@@ -61,7 +61,7 @@ public class BlogRestController {
         return blogPostRepository.save(newBlogPost);
     }
 
-    @PutMapping(value = "/blogposts")
+    @PostMapping(value = "/blogposts/")
     public ResponseEntity<Void> addBlogPost(@RequestBody BlogPost blogPost) {
         blogPostRepository.save(blogPost);
         return new ResponseEntity<Void>(HttpStatus.CREATED);

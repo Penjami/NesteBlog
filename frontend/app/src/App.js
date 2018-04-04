@@ -14,7 +14,8 @@ class App extends Component {
 	  this.renderNewBlogPost = this.renderNewBlogPost.bind(this);
 	  this.renderPage = this.renderPage.bind(this)
 	  this.state = {blogPosts: [], pageState: 'HOME',
-		  pageStates: ['HOME', 'NEWPOST', 'ABOUT']};
+		  pageStates: ['HOME', 'NEWPOST', 'ABOUT'],
+      author: '', title: '', content: ''};
   }
 
   onDelete(blogPost) {
@@ -43,13 +44,26 @@ class App extends Component {
   }
 
 	handleBlogSubmit(event) {
+    event.preventDefault();
 		const data = new FormData(event.target);
+		const iterator = data.entries()
 
 		fetch('/blogposts/', {
-			method: 'POST',
-			body: data,
-		});
+			method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        author: this.state.author,
+        content: this.state.content,
+        title: this.state.title
+		})}).then(this.switchToHome);
+
 	}
+
+	handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
 	switchToNewBlog() {
 		this.setState({pageState: this.state.pageStates[1]})
@@ -67,9 +81,8 @@ class App extends Component {
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
 					<li><a onClick={this.switchToNewBlog}>Create New Blog Post</a></li>
-					<input type="text" placeholder="Search.."/>
 				</ul>
-				<BlogPostList blogPosts={this.state.blogPosts}/>
+				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
 				<footer></footer>
 			</page>
 		)
@@ -83,12 +96,15 @@ class App extends Component {
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
 					<li><a onClick={this.switchToNewBlog}>Create New Blog Post</a></li>
-					<input type="text" placeholder="Search.."/>
 				</ul>
 				<form onSubmit={this.handleBlogSubmit}>
-					<input type='text' name='author' />
-					<input type='text' name='title' />
-					<input type='text' name='content' />
+          <p>author</p>
+					<input type='text' name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>
+          <p>title</p>
+					<input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
+          <p>content</p>
+					<input type='text' name='content' value={this.state.content} onChange={e => this.handleChange(e)} />
+          <button type='Submit'>save</button>
 				</form>
 				<footer></footer>
 			</page>
@@ -103,9 +119,8 @@ class App extends Component {
 					<li><a>Contact</a></li>
 					<li><a>About</a></li>
 					<li><a href="" onClick={this.switchToNewBlog}>Add New Blog Post</a></li>
-					<input type="text" placeholder="Search.."/>
 				</ul>
-				<BlogPostList blogPosts={this.state.blogPosts}/>
+				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
 				<footer></footer>
 			</page>
 		)
