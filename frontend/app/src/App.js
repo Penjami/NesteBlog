@@ -7,6 +7,7 @@ class App extends Component {
     super(props);
     this.state = {blogPosts: []};
     this.onDelete = this.onDelete.bind(this);
+	  this.onModify = this.onModify.bind(this);
     this.loadBlogpostsFromDB = this.loadBlogpostsFromDB.bind(this);
 	  this.switchToNewBlog = this.switchToNewBlog.bind(this);
     this.switchToHome = this.switchToHome.bind(this);
@@ -21,6 +22,11 @@ class App extends Component {
   onDelete(blogPost) {
     this.deleteBlogPost(blogPost.id);
   }
+
+
+	onModify(blogPost) {
+		this.setState({pageState: this.state.pageStates[1], author: blogPost.author, title: blogPost.title, content: blogPost.content})
+	}
 
   deleteBlogPost(index) {
     fetch(`/blogposts/` + index, {
@@ -57,7 +63,9 @@ class App extends Component {
         title: this.state.title
 		})}).then((result)=> {
 		  console.log(result);
-    }).then(this.switchToHome);
+    }).then(this.switchToHome).then(()=> {
+			this.setState({ author: '', title: '', content: ''})
+		});
 
 	}
 
@@ -84,7 +92,7 @@ class App extends Component {
 					<li><a>About</a></li>
 					<li><a onClick={this.switchToNewBlog}>Create New Blog Post</a></li>
 				</ul>
-				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
+				<BlogPostList onDelete={this.onDelete} onModify={this.onModify} blogPosts={this.state.blogPosts}/>
 				<footer></footer>
 			</page>
 		)
@@ -105,7 +113,7 @@ class App extends Component {
           <p>title</p>
 					<input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
           <p>content</p>
-					<input type='text' name='content' value={this.state.content} onChange={e => this.handleChange(e)} />
+					<textarea rows="4" cols="50" name='content' value={this.state.content} onChange={e => this.handleChange(e)}></textarea>
           <button type='Submit'>save</button>
 				</form>
 				<footer></footer>
@@ -114,18 +122,7 @@ class App extends Component {
 	}
 
 	renderAbout() {
-		return (
-			<page>
-				<ul>
-					<li><a href="" onClick={this.switchToHome}>Home</a></li>
-					<li><a>Contact</a></li>
-					<li><a>About</a></li>
-					<li><a href="" onClick={this.switchToNewBlog}>Add New Blog Post</a></li>
-				</ul>
-				<BlogPostList onDelete={this.onDelete} blogPosts={this.state.blogPosts}/>
-				<footer></footer>
-			</page>
-		)
+  	
 	}
 
 	renderPage() {
@@ -160,7 +157,7 @@ class App extends Component {
 class BlogPostList extends React.Component{
   render() {
     let blogPosts = this.props.blogPosts.map(blogPost =>
-      <BlogPost blogPost={blogPost} onDelete={this.props.onDelete}/>
+      <BlogPost blogPost={blogPost} onDelete={this.props.onDelete} onModify={this.props.onModify}/>
     );
     return (
       <div>
@@ -174,12 +171,17 @@ class BlogPost extends React.Component {
 
   constructor(props) {
     super(props);
+	  this.handleModify = this.handleModify.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleDelete() {
     this.props.onDelete(this.props.blogPost);
   }
+
+	handleModify() {
+		this.props.onModify(this.props.blogPost);
+	}
 
   render() {
     return (
@@ -188,6 +190,7 @@ class BlogPost extends React.Component {
         <p className="content" >{this.props.blogPost.content}</p>
         <p className="author" >{this.props.blogPost.author}</p>
         <button onClick={this.handleDelete}>Delete</button>
+	      <button onClick={this.handleModify}>Modify</button>
       </div>
     )
   }
