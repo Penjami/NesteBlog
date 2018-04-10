@@ -57,7 +57,9 @@ class App extends Component {
         title: this.state.title
 		})}).then((result)=> {
 		  console.log(result);
-    }).then(this.switchToHome);
+    }).then(this.switchToHome).then(()=> {
+			this.setState({ author: '', title: '', content: ''})
+		});
 
 	}
 
@@ -105,7 +107,7 @@ class App extends Component {
           <p>title</p>
 					<input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
           <p>content</p>
-					<input type='text' name='content' value={this.state.content} onChange={e => this.handleChange(e)} />
+					<textarea rows="4" cols="50" name='content' value={this.state.content} onChange={e => this.handleChange(e)}></textarea>
           <button type='Submit'>save</button>
 				</form>
 				<footer></footer>
