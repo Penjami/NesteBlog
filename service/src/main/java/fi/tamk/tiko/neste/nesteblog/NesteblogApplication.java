@@ -11,7 +11,6 @@ public class NesteblogApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NesteblogApplication.class, args);
-        System.out.println("Hello world!");
     }
 
     @Bean
