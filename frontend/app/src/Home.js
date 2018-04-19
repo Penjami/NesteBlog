@@ -58,7 +58,7 @@ class Post extends React.Component {
   render() {
     return (
       <div className="blogPost" >
-        <Link to={`/blogposts/${this.props.blogPost.id}`}><h2 className="title" >{this.props.blogPost.title}</h2></Link>
+        <h2 className="title" ><a href={`/blogposts/${this.props.blogPost.id}`}>{this.props.blogPost.title}</a></h2>
         <p className="content" >{this.props.blogPost.content}</p>
         <p className="author" >- {this.props.blogPost.author} {this.props.blogPost.createDate}</p>
       </div>
