@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
+import {createFilter} from 'react-search-input'
 import './App.css';
 import NavBar from "./NavBar";
 
-const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name']
+const KEYS_TO_FILTERS = ['author', 'title']
 
 export class Search extends React.Component {
 
   constructor(props) {
     super(props);
     this.loadBlogpostsFromDB = this.loadBlogpostsFromDB.bind(this);
-    this.state = {blogPosts: [], id: '', author: '', title: '', content: '', modify: false};
+    this.search = this.search.bind(this);
+    this.state = {searchBlogPosts: [{asd: ''}],allBlogPosts: [{asd: ''}], searchString: props.searchString};
   }
 
   componentDidMount() {
@@ -23,15 +25,18 @@ export class Search extends React.Component {
     }).then((response) => {
       return response.json();
     }).then(response => {
-      this.setState({blogPosts: response});
-    }).then(this.loadBlogpostsFromDB);;
+      this.setState({allBlogPosts: response});
+    }).then(this.search);
+  }
+
+  search() {
+	  this.setState({searchBlogPosts: this.state.allBlogPosts.filter(createFilter(this.state.searchString, KEYS_TO_FILTERS))});
   }
 
   render() {
     return (
       <div>
-        <NavBar/>
-        <BlogPostList blogPosts={this.state.blogPosts}/>
+        <BlogPostList blogPosts={this.state.searchBlogPosts}/>
         <footer></footer>
       </div>
     )
