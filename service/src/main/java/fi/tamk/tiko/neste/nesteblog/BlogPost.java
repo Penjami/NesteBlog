@@ -12,6 +12,9 @@ public class BlogPost {
     private long id;
     private String author;
     private String title;
+
+    @Lob
+    @Column(length = 50000)
     private String content;
     private LocalDate createDate;
     private LocalDate updateDate;
