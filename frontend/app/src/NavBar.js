@@ -4,34 +4,35 @@ import './App.css';
 
 export class NavBar extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.handleSearch = this.handleSearch.bind(this);
-		this.state = {search: '', searchDone: false};
-	}
+  constructor(props) {
+    super(props);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.state = {search: '', searchDone: false};
+  }
 
-	handleSearch(event) {
-		event.preventDefault();
+  handleSearch(event) {
+    event.preventDefault();
 
-		fetch('/api/blogposts/'+this.state.id, {
-			method: 'post',
-			headers: {'Content-Type':'application/json'},
-			body: JSON.stringify({
-				author: this.state.author,
-				content: this.state.content,
-				title: this.state.title
-			})}).then((result)=> {
-			console.log(result);
-		}).then(()=> {
-			this.setState({ author: '', title: '', content: ''})
-		}).then(this.setState({searchDone: true}));
-	}
+    fetch('/api/blogposts/' + this.state.id, {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        author: this.state.author,
+        content: this.state.content,
+        title: this.state.title
+      })
+    }).then((result) => {
+      console.log(result);
+    }).then(() => {
+      this.setState({author: '', title: '', content: ''})
+    }).then(this.setState({searchDone: true}));
+  }
 
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
   render() {
     return (
