@@ -9,6 +9,10 @@
   margin: auto;
 }
 
+.author {
+  font-style: italic;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
