@@ -14,19 +14,23 @@ public class BlogRestController {
     @Autowired
     BlogPostRepository blogPostRepository;
 
+    private String temp = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat orci auctor " +
+            "mauris ornare, sit amet aliquam turpis semper. Vestibulum ante ipsum primis in faucibus orci luctus et " +
+            "ultrices posuere cubilia Curae; Fusce feugiat arcu eget dictum elementum. Integer ultrices pretium posuere.";
+
     @PostConstruct
     public void init() {
-        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
-        addBlogPost(new BlogPost("joe", "asdasfq2r ", "jeeee"));
-        addBlogPost(new BlogPost("joe", "f  2e sd a", "jeeee"));
-        addBlogPost(new BlogPost("joe", "24 asd q2e asd", "jeeee"));
-        addBlogPost(new BlogPost("joe", "235 asd q ", "jeeee"));
-        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
-        addBlogPost(new BlogPost("joe", "1241", "jeeee"));
-        addBlogPost(new BlogPost("joe", "qwe", "jeeee"));
-        addBlogPost(new BlogPost("joe", "saf", "jeeee"));
-        addBlogPost(new BlogPost("joe", "cxaw", "jeeee"));
-        addBlogPost(new BlogPost("joe", "jejjee", "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("joe", temp, "jeeee"));
 
     }
 
