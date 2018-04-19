@@ -12,6 +12,8 @@ public class BlogPost {
     private long id;
     private String author;
     private String title;
+
+    @
     private String content;
     private LocalDate createDate;
     private LocalDate updateDate;
