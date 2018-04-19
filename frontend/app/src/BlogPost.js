@@ -57,6 +57,7 @@ export class BlogPost extends React.Component {
           <li><Link to="/newblogpost">Create New Blog Post</Link></li>
         </ul>
         <Post blogPost={this.state.blogPost} onDelete={this.onDelete} onModify={this.onModify}/>
+        <CommentList blogPost={this.state.blogPost}></CommentList>
         <footer></footer>
       </div>
     )
@@ -85,11 +86,46 @@ class Post extends React.Component {
         <h2 className="title" >{this.props.blogPost.title}</h2>
         <p className="content" >{this.props.blogPost.content}</p>
         <p className="author" >{this.props.blogPost.author}</p>
+        <p>{this.props.blogPost.createDate}</p>
         <button onClick={this.handleDelete}>Delete</button>
         <button onClick={this.handleModify}>Modify</button>
       </div>
     )
   }
+}
+
+
+class CommentList extends React.Component {
+	render() {
+	  let comments = '';
+	  if(this.props.blogPost.comments !== undefined) {
+      comments = this.props.blogPost.comments.map(comment =>
+        <Comment comment={comment}/>
+		  );
+	  }
+		return (
+      <div>
+				{comments}
+      </div>
+		)
+	}
+}
+
+class Comment extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+      <div className="blogPost" >
+        <Link to={`/blogposts/${this.props.blogPost.id}`}><h2 className="title" >{this.props.blogPost.title}</h2></Link>
+        <p className="content" >{this.props.blogPost.content}</p>
+        <p className="author" >- {this.props.blogPost.comments.author}</p>
+      </div>
+		)
+	}
 }
 
 export default BlogPost;
