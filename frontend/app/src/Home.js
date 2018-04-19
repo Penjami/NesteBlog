@@ -64,7 +64,7 @@ class Post extends React.Component {
       <div className="blogPost" >
 		    <Link to={`/blogposts/${this.props.blogPost.id}`}><h2 className="title" >{this.props.blogPost.title}</h2></Link>
         <p className="content" >{this.props.blogPost.content}</p>
-        <p className="author" >- {this.props.blogPost.author}</p>
+        <p className="author" >- {this.props.blogPost.author} {this.props.blogPost.createDate}</p>
       </div>
     )
   }
