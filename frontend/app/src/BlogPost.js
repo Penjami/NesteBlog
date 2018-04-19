@@ -85,8 +85,7 @@ class Post extends React.Component {
       <div className="blogPost" >
         <h2 className="title" >{this.props.blogPost.title}</h2>
         <p className="content" >{this.props.blogPost.content}</p>
-        <p className="author" >{this.props.blogPost.author}</p>
-        <p>{this.props.blogPost.createDate}</p>
+        <p className="author" >- {this.props.blogPost.author} {this.props.blogPost.createDate}</p>
         <button onClick={this.handleDelete}>Delete</button>
         <button onClick={this.handleModify}>Modify</button>
       </div>

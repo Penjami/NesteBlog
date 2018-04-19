@@ -33,6 +33,10 @@
   background: #ccc;
 }
 
+.newBlogPost {
+  margin-left: 20px;
+}
+
 .author {
   font-style: italic;
 }
