@@ -38,8 +38,6 @@ export class NavBar extends React.Component {
     return (
       <ul>
         <li><Link to="/">Home</Link></li>
-        <li><a>Contact</a></li>
-        <li><a>About</a></li>
         <li><Link to="/newblogpost">Create New Blog Post</Link></li>
         <div class="search-container">
           <form action="/action_page.php" onSubmit={this.handleSearch}>
