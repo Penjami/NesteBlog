@@ -47,7 +47,7 @@ export class NewBlogPost extends  React.Component {
           <li><a>About</a></li>
           <li><Link to="/newblogpost">Create New Blog Post</Link></li>
         </ul>
-        <form onSubmit={this.handleBlogSubmit}>
+        <form className="newBlogPost" onSubmit={this.handleBlogSubmit}>
           <p>author</p>
           <input type='text' name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>
           <p>title</p>
