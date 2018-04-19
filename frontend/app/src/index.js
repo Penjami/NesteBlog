@@ -6,6 +6,7 @@ import Home from './Home';
 import NewBlogPost from './NewBlogPost';
 import BlogPost from './BlogPost'
 import ModifyBlogPost from './ModifyBlogPost';
+import Search  from './Search'
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route exact path="/newblogpost" component={NewBlogPost} />
       <Route path="/modifyblogpost/:blogPostId" component={ModifyBlogPost} />
       <Route path="/blogposts/:blogPostId" component={BlogPost} />
+      <Route path="/search/:searchString" component={Search} />
     </div>
   </Router>,
   document.getElementById('root')

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import './App.css';
+import NavBar from "./NavBar";
 
 export class BlogPost extends React.Component {
 
@@ -35,8 +36,12 @@ export class BlogPost extends React.Component {
     }).then((response) => {
       return response.json();
     }).then(response => {
-      this.setState({blogPost: response});
+      response.comments.push({author: 'joe', content:'jee'});
+    	this.setState({blogPost: response});
+
     });
+
+
   }
 
   render() {
@@ -50,12 +55,7 @@ export class BlogPost extends React.Component {
 
     return (
       <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><a>Contact</a></li>
-          <li><a>About</a></li>
-          <li><Link to="/newblogpost">Create New Blog Post</Link></li>
-        </ul>
+        <NavBar/>
         <Post blogPost={this.state.blogPost} onDelete={this.onDelete} onModify={this.onModify}/>
         <CommentList blogPost={this.state.blogPost}></CommentList>
         <footer></footer>
@@ -119,10 +119,9 @@ class Comment extends React.Component {
 
 	render() {
 		return (
-      <div className="blogPost" >
-        <Link to={`/blogposts/${this.props.blogPost.id}`}><h2 className="title" >{this.props.blogPost.title}</h2></Link>
-        <p className="content" >{this.props.blogPost.content}</p>
-        <p className="author" >- {this.props.blogPost.comments.author}</p>
+      <div className="comment" >
+        <p className="content" >{this.props.comment.content}</p>
+        <p className="author" >- {this.props.comment.author}</p>
       </div>
 		)
 	}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import './App.css';
+import NavBar from "./NavBar";
 
 export class ModifyBlogPost extends React.Component {
 
@@ -52,12 +53,7 @@ export class ModifyBlogPost extends React.Component {
 
     return (
       <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><a>Contact</a></li>
-          <li><a>About</a></li>
-          <li><Link to="/newblogpost">Create New Blog Post</Link></li>
-        </ul>
+        <NavBar/>
         <form onSubmit={this.handleBlogSubmit}>
           <p>author</p>
           <input type='text' name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>

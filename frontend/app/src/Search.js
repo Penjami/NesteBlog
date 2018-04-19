@@ -3,7 +3,9 @@ import {Link, Redirect} from 'react-router-dom';
 import './App.css';
 import NavBar from "./NavBar";
 
-export class Home extends React.Component {
+const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name']
+
+export class Search extends React.Component {
 
   constructor(props) {
     super(props);
@@ -66,4 +68,4 @@ class Post extends React.Component {
   }
 }
 
-export default Home;
+export default Search;
