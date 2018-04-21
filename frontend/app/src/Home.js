@@ -21,7 +21,7 @@ export class Home extends React.Component {
       return response.json();
     }).then(response => {
       this.setState({blogPosts: response});
-    }).then(this.loadBlogpostsFromDB);;
+    });
   }
 
   render() {
