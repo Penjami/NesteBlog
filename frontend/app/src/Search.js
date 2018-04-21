@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import {createFilter} from 'react-search-input'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {createFilter} from 'react-search-input';
 import './App.css';
 import NavBar from "./NavBar";
 
@@ -11,11 +11,19 @@ export class Search extends React.Component {
   constructor(props) {
     super(props);
     this.loadBlogpostsFromDB = this.loadBlogpostsFromDB.bind(this);
-    this.search = this.search.bind(this);
-    this.state = {searchBlogPosts: [{asd: ''}],allBlogPosts: [{asd: ''}], searchString: props.searchString};
+    this.onUpdate = this.onUpdate.bind(this);
+    this.state = {searchBlogPosts: [], searchString: ''};
   }
 
   componentDidMount() {
+    const { match: { params } } = this.props;
+    console.log(params.searchString);
+    this.setState({searchString: params.searchString});
+    this.loadBlogpostsFromDB();
+  }
+
+  onUpdate(searchString) {
+    this.setState({searchString: searchString});
     this.loadBlogpostsFromDB();
   }
 
@@ -25,17 +33,14 @@ export class Search extends React.Component {
     }).then((response) => {
       return response.json();
     }).then(response => {
-      this.setState({allBlogPosts: response});
-    }).then(this.search);
-  }
-
-  search() {
-	  this.setState({searchBlogPosts: this.state.allBlogPosts.filter(createFilter(this.state.searchString, KEYS_TO_FILTERS))});
+      this.setState({searchBlogPosts: response.filter(createFilter(this.state.searchString, KEYS_TO_FILTERS))});
+    });
   }
 
   render() {
     return (
       <div>
+        <NavBar onUpdate={this.onUpdate}/>
         <BlogPostList blogPosts={this.state.searchBlogPosts}/>
         <footer></footer>
       </div>

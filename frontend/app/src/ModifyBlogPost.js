@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import React from 'react';
+import {Redirect} from 'react-router-dom';
 import './App.css';
 import NavBar from "./NavBar";
 
@@ -36,7 +36,7 @@ export class ModifyBlogPost extends React.Component {
       })}).then((result)=> {
       console.log(result);
     }).then(()=> {
-      this.setState({ author: '', title: '', content: ''})
+      this.setState({ author: '', title: '', content: ''});
     }).then(this.setState({redirect: true}));
   }
 
@@ -64,48 +64,6 @@ export class ModifyBlogPost extends React.Component {
           <button type='Submit'>save</button>
         </form>
         <footer></footer>
-      </div>
-    )
-  }
-}
-
-class BlogPostList extends React.Component {
-  render() {
-    let blogPosts = this.props.blogPosts.map(blogPost =>
-      <BlogPost blogPost={blogPost} onDelete={this.props.onDelete} onModify={this.props.onModify}/>
-    );
-    return (
-      <div>
-        {blogPosts}
-      </div>
-    )
-  }
-}
-
-class BlogPost extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.handleModify = this.handleModify.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  handleDelete() {
-    this.props.onDelete(this.props.blogPost);
-  }
-
-  handleModify() {
-    this.props.onModify(this.props.blogPost);
-  }
-
-  render() {
-    return (
-      <div className="blogPost" >
-        <h2 className="title" >{this.props.blogPost.title}</h2>
-        <p className="content" >{this.props.blogPost.content}</p>
-        <p className="author" >{this.props.blogPost.author}</p>
-        <button onClick={this.handleDelete}>Delete</button>
-        <button onClick={this.handleModify}>Modify</button>
       </div>
     )
   }

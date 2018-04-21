@@ -20,17 +20,17 @@ public class BlogRestController {
 
     @PostConstruct
     public void init() {
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
-        addBlogPost(new BlogPost("joe", temp, "jeeee"));
+        addBlogPost(new BlogPost("Lowell Lindsay", temp, "jeeee"));
+        addBlogPost(new BlogPost("Andrew Gamble", temp, "jeeee"));
+        addBlogPost(new BlogPost("Phillip Stafford", temp, "jeeee"));
+        addBlogPost(new BlogPost("Victor McCarthy", temp, "jeeee"));
+        addBlogPost(new BlogPost("Mike Guy", temp, "jeeee"));
+        addBlogPost(new BlogPost("Jose Hansen", temp, "jeeee"));
+        addBlogPost(new BlogPost("Dale Stafford", temp, "jeeee"));
+        addBlogPost(new BlogPost("Joshua Good", temp, "jeeee"));
+        addBlogPost(new BlogPost("Dylan O'Connor", temp, "jeeee"));
+        addBlogPost(new BlogPost("Shane Hansen", temp, "jeeee"));
+        addBlogPost(new BlogPost("Nancy Drake", temp, "jeeee"));
 
     }
 
