@@ -146,10 +146,6 @@ class CommentList extends React.Component {
 
 class Comment extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
       <div className="comment" >

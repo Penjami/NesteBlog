@@ -63,10 +63,6 @@ class BlogPostList extends React.Component {
 
 class Post extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="blogPost" >
