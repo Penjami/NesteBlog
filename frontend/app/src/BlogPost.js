@@ -10,9 +10,9 @@ export class BlogPost extends React.Component {
     this.onDelete = this.onDelete.bind(this);
 	  this.onModify = this.onModify.bind(this);
 	  this.deleteBlogPost = this.deleteBlogPost.bind(this);
+	  this.commentPost = this.commentPost.bind(this);
     this.state = {blogPost: {}, modify: false, delete: false};
   }
-
 
 	onDelete(blogPost) {
 		this.deleteBlogPost(blogPost.id);
@@ -36,12 +36,22 @@ export class BlogPost extends React.Component {
     }).then((response) => {
       return response.json();
     }).then(response => {
-      response.comments.push({author: 'joe', content:'jee'});
     	this.setState({blogPost: response});
-
     });
+  }
 
-
+  commentPost(blogPost) {
+    fetch('/api/blogposts/'+blogPost.id, {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        author: blogPost.author,
+        content: blogPost.content,
+        title: blogPost.title,
+        comments: blogPost.comments
+      })}).then(()=> {
+      this.forceUpdate();
+    });
   }
 
   render() {
@@ -56,7 +66,7 @@ export class BlogPost extends React.Component {
     return (
       <div>
         <NavBar/>
-        <Post blogPost={this.state.blogPost} onDelete={this.onDelete} onModify={this.onModify}/>
+        <Post blogPost={this.state.blogPost} onDelete={this.onDelete} onModify={this.onModify} commentPost={this.commentPost}/>
         <CommentList blogPost={this.state.blogPost}></CommentList>
         <footer></footer>
       </div>
@@ -70,6 +80,8 @@ class Post extends React.Component {
     super(props);
     this.handleModify = this.handleModify.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleComment = this.handleComment.bind(this);
+    this.state = {comment: ''};
   }
 
   handleDelete() {
@@ -80,6 +92,23 @@ class Post extends React.Component {
     this.props.onModify(this.props.blogPost);
   }
 
+  handleComment(e) {
+    e.preventDefault();
+    if(this.state.comment !== '') {
+      this.props.blogPost.comments.push({author: 'joe', content: this.state.comment});
+      this.props.commentPost(this.props.blogPost);
+      this.setState({comment: ''});
+    } else {
+      console.log("Can't post empty comment");
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   render() {
     return (
       <div className="blogPost" >
@@ -88,6 +117,11 @@ class Post extends React.Component {
         <p className="author" >- {this.props.blogPost.author} {this.props.blogPost.createDate}</p>
         <button onClick={this.handleDelete}>Delete</button>
         <button onClick={this.handleModify}>Modify</button>
+        <h4>Add Comment</h4>
+        <form onSubmit={this.handleComment}>
+          <textarea rows="4" cols="50" name='comment' value={this.state.comment} onChange={e => this.handleChange(e)}/>
+          <button type='Submit'>save</button>
+        </form>
       </div>
     )
   }

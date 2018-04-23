@@ -20,6 +20,8 @@ public class BlogRestController {
 
     @PostConstruct
     public void init() {
+        BlogPost post = new BlogPost("Nancy Drake", temp, "jeeee");
+        post.getComments().add(new Comment("jee", "jeeeee"));
         addBlogPost(new BlogPost("Lowell Lindsay", temp, "jeeee"));
         addBlogPost(new BlogPost("Andrew Gamble", temp, "jeeee"));
         addBlogPost(new BlogPost("Phillip Stafford", temp, "jeeee"));
@@ -30,8 +32,7 @@ public class BlogRestController {
         addBlogPost(new BlogPost("Joshua Good", temp, "jeeee"));
         addBlogPost(new BlogPost("Dylan O'Connor", temp, "jeeee"));
         addBlogPost(new BlogPost("Shane Hansen", temp, "jeeee"));
-        addBlogPost(new BlogPost("Nancy Drake", temp, "jeeee"));
-
+        addBlogPost(post);
     }
 
     @RequestMapping(value = "/api/blogposts", method = RequestMethod.GET)
@@ -61,6 +62,10 @@ public class BlogRestController {
 
         newBlogPost.setTitle(blogPostDetails.getTitle());
         newBlogPost.setContent(blogPostDetails.getContent());
+        newBlogPost.getComments().clear();
+        for(int i = 0; i < blogPostDetails.getComments().size(); i++) {
+            newBlogPost.getComments().add(blogPostDetails.getComments().get(i));
+        }
 
         return blogPostRepository.save(newBlogPost);
     }

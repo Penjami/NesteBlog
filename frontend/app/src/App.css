@@ -17,6 +17,18 @@ h2 {
   margin: auto;
 }
 
+.comment {
+  border-bottom: 2px;
+  border-left: 2px;
+  border-right: 2px;
+  border-style: solid;
+  border-color: #0E2240;
+  padding-left: 10px;
+  border-top: 0px;
+  width: 70%;
+  margin: auto;
+}
+
 .nav-search {
   padding: 6px;
   margin-top: 8px;

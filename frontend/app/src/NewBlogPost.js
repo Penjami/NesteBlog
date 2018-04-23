@@ -25,7 +25,7 @@ export class NewBlogPost extends  React.Component {
       })}).then((result)=> {
       console.log(result);
     }).then(()=> {
-      this.setState({ author: '', title: '', content: ''})
+      this.setState({ author: '', title: '', content: ''});
     }).then(this.setState({redirect: true}));
   }
 

@@ -3,6 +3,7 @@ package fi.tamk.tiko.neste.nesteblog;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "blogposts")
@@ -18,15 +19,13 @@ public class BlogPost {
     private String content;
     private LocalDate createDate;
     private LocalDate updateDate;
-    private ArrayList<String> comments;
+    @ElementCollection
+    private List<Comment> comments = new ArrayList<>();
     private int likes;
 
-    public BlogPost() {
-        comments = new ArrayList<>();
-    }
+    public BlogPost() {}
 
     public BlogPost(String author, String content, String title) {
-        comments = new ArrayList<>();
         this.author = author;
         this.content = content;
         this.title = title;
@@ -80,11 +79,11 @@ public class BlogPost {
         this.updateDate = updateDate;
     }
 
-    public ArrayList<String> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 

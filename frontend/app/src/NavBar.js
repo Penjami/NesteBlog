@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link, Redirect, withRouter} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './App.css';
-
-const SomeComponent = withRouter(props => <NavBar/>);
 
 export class NavBar extends React.Component {
 
