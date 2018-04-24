@@ -17,7 +17,7 @@ export class NavBar extends React.Component {
     this.setState({searchDone: true});
     this.setState({lastSearch: this.state.search});
     if(window.location.pathname.substr(0,8) === '/search/') {
-      this.onUpdate();
+    	this.onUpdate();
     }
 	}
 
@@ -47,11 +47,12 @@ export class NavBar extends React.Component {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/newblogpost">Create New Blog Post</Link></li>
         <div className="search-container">
-          <form action="/action_page.php" onSubmit={this.handleSearch}>
+          <form onSubmit={this.handleSearch}>
             <input className="nav-search" name="search" type="text" placeholder="Search.." onChange={e => this.handleChange(e)}/>
             <button type="submit"><i className="fa fa-search"></i></button>
           </form>
         </div>
+	      <button>Login</button>
       </ul>
     )
   }

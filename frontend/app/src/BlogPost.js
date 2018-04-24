@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import './App.css';
 import NavBar from "./NavBar";
 
+
 export class BlogPost extends React.Component {
 
   constructor(props) {

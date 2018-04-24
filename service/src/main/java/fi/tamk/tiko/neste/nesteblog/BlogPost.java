@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Has all the information that the blogpost needs.
+ */
 @Entity
 @Table(name = "blogposts")
 public class BlogPost {
@@ -25,6 +29,12 @@ public class BlogPost {
 
     public BlogPost() {}
 
+    /**
+     *
+     * @param author
+     * @param content
+     * @param title
+     */
     public BlogPost(String author, String content, String title) {
         this.author = author;
         this.content = content;
@@ -95,12 +105,18 @@ public class BlogPost {
         this.likes = likes;
     }
 
+    /**
+     * Set the Create date and Update date, when the blogpost has been created.
+     */
     @PrePersist
     protected void onCreate() {
         setCreateDate(LocalDate.now());
         setUpdateDate(LocalDate.now());
     }
 
+    /**
+     * Set the update date, when the blogpost has been updated.
+     */
     @PreUpdate
     protected void onUpdate() {
         setUpdateDate(LocalDate.now());
