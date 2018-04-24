@@ -1,104 +1,166 @@
-* {box-sizing: border-box;}
+ * {
+    box-sizing: border-box;
+  }
 
-h2 {
-  margin-top: 0px;
-  padding-top: 10px;
-}
+  h2 {
+    margin-top: 0px;
+    padding-top: 10px;
+  }
 
-.blogPost {
-  border-bottom: 2px;
-  border-left: 2px;
-  border-right: 2px;
-  border-style: solid;
-  border-color: #0E2240;
-  padding-left: 10px;
-  border-top: 0px;
-  width: 70%;
-  margin: auto;
-}
+ .burgerNavigation {
+   display: none;
+ }
 
-.comment {
-  border-bottom: 2px;
-  border-left: 2px;
-  border-right: 2px;
-  border-style: solid;
-  border-color: #0E2240;
-  padding-left: 10px;
-  border-top: 0px;
-  width: 70%;
-  margin: auto;
-}
+  .commentTextArea {
+    resize: none;
+    width:95%;
+    height:100%;
+    box-sizing: border-box;         /* For IE and modern versions of Chrome */
+    -moz-box-sizing: border-box;    /* For Firefox                          */
+    -webkit-box-sizing: border-box; /* For Safari                           */
+  }
 
-.nav-search {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-}
+  .submitButton {
+    margin: 10px 10px 10px 0px;
+  }
 
-.search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
+  .blogPost {
+    border-bottom: 2px;
+    border-left: 2px;
+    border-right: 2px;
+    border-style: solid;
+    border-color: #0E2240;
+    padding-left: 10px;
+    border-top: 0px;
+    width: 70%;
+    margin: auto;
+  }
 
-.search-container button:hover {
-  background: #ccc;
-}
+  .comment {
+    border-bottom: 2px;
+    border-left: 2px;
+    border-right: 2px;
+    border-style: solid;
+    border-color: #0E2240;
+    padding: 10px;
+    border-top: 0px;
+    width: 70%;
+    margin: auto;
+  }
 
-.newBlogPost {
-  margin-left: 20px;
-}
+  .nav-search {
+    padding: 6px;
+    width: 150px;
+    font-size: 17px;
+    border: none;
+  }
 
-.modifyBlogPost {
-  margin-left: 20px;
-}
+  .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
 
-.author {
-  font-style: italic;
-}
+  .search-container button:hover {
+    background: #ccc;
+  }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #0E2240;
-}
+  .newBlogPost {
+    margin-left: 20px;
+  }
 
-li {
-  float: left;
-}
+  .modifyBlogPost {
+    margin-left: 20px;
+  }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+  .author {
+    font-style: italic;
+  }
 
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  cursor: pointer;
-  background-color: #111;
-}
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0E2240;
+  }
 
-li a.active {
-  background-color: #2196F3;
-  color: white;
-}
+  li {
+    float: left;
+  }
 
-.search-container {
-  float: right;
-}
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+  }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    cursor: pointer;
+    background-color: #111;
+  }
+
+  li a.active {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  .search-container {
+    padding: 10px 10px 10px 10px;
+    float: right;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+ @media screen and (min-width: 500px) {
+   .burgerButton {
+     display: none;
+   }
+ }
+ @media screen and (max-width: 499px) {
+   .burgerButton {
+     float: left;
+     border: 5px solid white;
+     width: 40px;
+     border-radius: 10px;
+     margin: 8px;
+   }
+
+   .burgerButton:hover {
+     background-color: #2196F3;
+     cursor: pointer;
+   }
+
+   .normalNav {
+     display: none;
+   }
+
+   div.burger {
+     height: 4px;
+     background-color: white;
+     margin: 5px;
+   }
+
+   .navigationBarStyle {
+     background-color: #2196F3;
+   }
+
+   .burgerNavigation a {
+     display: block;
+     text-decoration: none;
+     text-align: left;
+   }
+ }

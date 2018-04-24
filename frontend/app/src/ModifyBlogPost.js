@@ -60,7 +60,7 @@ export class ModifyBlogPost extends React.Component {
           <p>title</p>
           <input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
           <p>content</p>
-          <textarea rows="4" cols="50" name='content' value={this.state.content} onChange={e => this.handleChange(e)}></textarea>
+          <textarea className="commentTextArea" rows="4" cols="50" name='content' value={this.state.content} onChange={e => this.handleChange(e)}></textarea>
           <button type='Submit'>save</button>
         </form>
         <footer></footer>

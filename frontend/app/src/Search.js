@@ -38,13 +38,22 @@ export class Search extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <NavBar onUpdate={this.onUpdate}/>
-        <BlogPostList blogPosts={this.state.searchBlogPosts}/>
-        <footer></footer>
-      </div>
-    )
+    if(this.state.searchBlogPosts.length === 0) {
+	    return (
+        <div>
+          <NavBar onUpdate={this.onUpdate}/>
+          <p>Your search did not return any results</p>
+        </div>
+	    )
+    } else {
+	    return (
+        <div>
+          <NavBar onUpdate={this.onUpdate}/>
+          <BlogPostList blogPosts={this.state.searchBlogPosts}/>
+          <footer></footer>
+        </div>
+	    )
+    }
   }
 }
 

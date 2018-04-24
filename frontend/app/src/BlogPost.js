@@ -96,9 +96,13 @@ class Post extends React.Component {
   handleComment(e) {
     e.preventDefault();
     if(this.state.comment !== '') {
-      this.props.blogPost.comments.push({author: 'joe', content: this.state.comment});
+    	let tempAuthor = this.state.author;
+    	if(tempAuthor === "") {
+    		tempAuthor = 'Anonymous';
+	    }
+      this.props.blogPost.comments.push({author: tempAuthor, content: this.state.comment});
       this.props.commentPost(this.props.blogPost);
-      this.setState({comment: ''});
+      this.setState({comment: '', author: ''});
     } else {
       console.log("Can't post empty comment");
     }
@@ -120,8 +124,11 @@ class Post extends React.Component {
         <button onClick={this.handleModify}>Modify</button>
         <h4>Add Comment</h4>
         <form onSubmit={this.handleComment}>
-          <textarea rows="4" cols="50" name='comment' value={this.state.comment} onChange={e => this.handleChange(e)}/>
-          <button type='Submit'>save</button>
+	        <p>name:</p>
+	        <input name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>
+	        <p>comment:</p>
+          <textarea className="commentTextArea" rows="4" name='comment' value={this.state.comment} onChange={e => this.handleChange(e)}/>
+          <button className="submitButton" type='Submit'>save</button>
         </form>
       </div>
     )
