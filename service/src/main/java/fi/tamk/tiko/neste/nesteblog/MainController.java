@@ -5,10 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Starts the frontend.
+ * This class starts the frontend of the application.
+ *
+ * @author penjami
+ * @version 1.0
+ * @since 1.0
  */
 @Controller
 public class MainController {
+
+    /**
+     * @return Index page.
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "index";
