@@ -5,40 +5,94 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * Has all the information that the blogpost needs.
+ * Blogpost class has all the information about the blogpost.
+ *
+ * @author penjami
+ * @version 1.0
+ * @since 1.0
  */
 @Entity
 @Table(name = "blogposts")
 public class BlogPost {
+    /**
+     * Automatically generated id for database organisation.
+     */
     @Id
     @GeneratedValue
     private long id;
+
+    /**
+     * The creator of the blogpost.
+     */
     private String author;
+
+    /**
+     * The title of the blogpost.
+     */
     private String title;
 
+    /**
+     * The content of the blogpost with a maximum length of 50000 characters.
+     */
     @Lob
     @Column(length = 50000)
     private String content;
+
+    /**
+     * The date the blogpost was created on.
+     */
     private LocalDate createDate;
+
+    /**
+     * The date the blog post was last updated on.
+     */
     private LocalDate updateDate;
+
+    /**
+     * A collection of comments from Comment class.
+     */
     @ElementCollection
     private List<Comment> comments = new ArrayList<>();
+
+    /**
+     * Number of likes the blogpost has.
+     */
     private int likes;
 
+    /**
+     * Class constructor.
+     */
     public BlogPost() {}
 
     /**
+     * Class constructor with parameters.
      *
-     * @param author
-     * @param content
-     * @param title
+     * @param author Creator of blogpost.
+     * @param content Content of blogpost.
+     * @param title Title of blogpost.
      */
     public BlogPost(String author, String content, String title) {
         this.author = author;
         this.content = content;
         this.title = title;
+    }
+
+    /**
+     * When creating a new blogpost, save today's date on both create and updateDate variables.
+     */
+    @PrePersist
+    protected void onCreate() {
+        setCreateDate(LocalDate.now());
+        setUpdateDate(LocalDate.now());
+    }
+
+    /**
+     * On updating the blogpost save today's date to updateDate
+     */
+    @PreUpdate
+    protected void onUpdate() {
+        setUpdateDate(LocalDate.now());
     }
 
     public long getId() {
@@ -104,22 +158,4 @@ public class BlogPost {
     public void setLikes(int likes) {
         this.likes = likes;
     }
-
-    /**
-     * Set the Create date and Update date, when the blogpost has been created.
-     */
-    @PrePersist
-    protected void onCreate() {
-        setCreateDate(LocalDate.now());
-        setUpdateDate(LocalDate.now());
-    }
-
-    /**
-     * Set the update date, when the blogpost has been updated.
-     */
-    @PreUpdate
-    protected void onUpdate() {
-        setUpdateDate(LocalDate.now());
-    }
-
 }
