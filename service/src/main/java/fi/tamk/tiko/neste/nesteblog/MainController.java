@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * This class starts the frontend of the application.
+ * This class is used to map the frontend of the application.
  *
  * @author penjami
  * @version 1.0
