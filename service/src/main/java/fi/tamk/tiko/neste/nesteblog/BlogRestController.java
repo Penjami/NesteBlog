@@ -105,7 +105,7 @@ public class BlogRestController {
      * @param blogPost BlogPost to be saved.
      * @return Response according to what happened during the saving of the BlogPost.
      */
-    @PostMapping(value = "/api/blogposts/")
+    @PostMapping(value = "/api/blogposts")
     public ResponseEntity<Void> addBlogPost(@RequestBody BlogPost blogPost) {
         blogPostRepository.save(blogPost);
         return new ResponseEntity<Void>(HttpStatus.CREATED);

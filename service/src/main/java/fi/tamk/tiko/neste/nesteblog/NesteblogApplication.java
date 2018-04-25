@@ -23,6 +23,15 @@ public class NesteblogApplication {
      */
     public static void main(String[] args) {
         SpringApplication.run(NesteblogApplication.class, args);
+        System.out.println("Get all: curl http://localhost:8080/api/blogposts");
+        System.out.println("Get one: curl http://localhost:8080/api/blogposts/1");
+        System.out.println("Delete one: curl -v -X DELETE http://localhost:8080/api/blogposts/1");
+        System.out.println("add one: curl -v -d \"{\"author\":\"test author\",\"content\":\"test content\"," +
+                "\"title\":\"test title\",\"likes\":0,\"comments\":[]}\" -H \"Content-type:application/json\"" +
+                "  http://localhost:8080/api/blogposts");
+        System.out.println("modify one: curl -v -d \"{\"author\":\"test author\",\"content\":\"test content\"," +
+                "\"title\":\"test title\",\"likes\":0,\"comments\":[]}\" -H \"Content-type:application/json\"" +
+                "  http://localhost:8080/api/blogposts/1");
     }
 
     /**
