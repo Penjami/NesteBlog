@@ -12,6 +12,7 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
+
 @Entity
 @Table(name = "blogposts")
 public class BlogPost {
