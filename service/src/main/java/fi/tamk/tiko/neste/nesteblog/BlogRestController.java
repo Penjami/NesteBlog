@@ -36,18 +36,16 @@ public class BlogRestController {
      */
     @PostConstruct
     public void init() {
-        BlogPost post = new BlogPost("Nancy Drake", temp, "jeeee");
-        post.getComments().add(new Comment("jee", "jeeeee"));
-        addBlogPost(new BlogPost("Lowell Lindsay", temp, "jeeee"));
-        addBlogPost(new BlogPost("Andrew Gamble", temp, "jeeee"));
-        addBlogPost(new BlogPost("Phillip Stafford", temp, "jeeee"));
-        addBlogPost(new BlogPost("Victor McCarthy", temp, "jeeee"));
-        addBlogPost(new BlogPost("Mike Guy", temp, "jeeee"));
-        addBlogPost(new BlogPost("Jose Hansen", temp, "jeeee"));
-        addBlogPost(new BlogPost("Dale Stafford", temp, "jeeee"));
-        addBlogPost(new BlogPost("Joshua Good", temp, "jeeee"));
-        addBlogPost(new BlogPost("Dylan O'Connor", temp, "jeeee"));
-        addBlogPost(new BlogPost("Shane Hansen", temp, "jeeee"));
+        BlogPost post = new BlogPost("Nancy Drake", temp, "Lorem Ipsum");
+        post.getComments().add(new Comment("jee", "This site is so good!"));
+        addBlogPost(new BlogPost("Lowell Lindsay", temp, "So many projects"));
+        addBlogPost(new BlogPost("Andrew Gamble", temp, "Team Liquid is the best!"));
+        addBlogPost(new BlogPost("Phillip Stafford", temp, "How long until summer?"));
+        addBlogPost(new BlogPost("Victor McCarthy", temp, "I wish I had beer..."));
+        addBlogPost(new BlogPost("Mike Guy", temp, "This is a clickbait."));
+        addBlogPost(new BlogPost("Jose Hansen", temp, "What is this site about?"));
+        addBlogPost(new BlogPost("Dale Stafford", temp, "I'm having a déjà vu about these blogposts."));
+        addBlogPost(new BlogPost("Joshua Good", temp, "Is HTML a programming language?"));
         addBlogPost(post);
     }
 
