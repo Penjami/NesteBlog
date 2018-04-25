@@ -12,6 +12,7 @@ export class BlogPost extends React.Component {
 	  this.onModify = this.onModify.bind(this);
 	  this.deleteBlogPost = this.deleteBlogPost.bind(this);
 	  this.commentPost = this.commentPost.bind(this);
+	  this.likePost = this.likePost.bind(this);
     this.state = {blogPost: {}, modify: false, delete: false};
   }
 
@@ -55,6 +56,20 @@ export class BlogPost extends React.Component {
     });
   }
 
+	likePost(blogPost) {
+		fetch('/api/blogposts/'+blogPost.id, {
+			method: 'post',
+			headers: {'Content-Type':'application/json'},
+			body: JSON.stringify({
+				author: blogPost.author,
+				content: blogPost.content,
+				title: blogPost.title,
+				likes: blogPost.likes
+			})}).then(()=> {
+			this.forceUpdate();
+		});
+	}
+
   render() {
 	  if (this.state.modify) {
 		  return <Redirect push to={`/modifyblogpost/${this.state.id}`}/>;
@@ -67,7 +82,7 @@ export class BlogPost extends React.Component {
     return (
       <div>
         <NavBar/>
-        <Post blogPost={this.state.blogPost} onDelete={this.onDelete} onModify={this.onModify} commentPost={this.commentPost}/>
+        <Post blogPost={this.state.blogPost} onLike={this.likePost} onDelete={this.onDelete} onModify={this.onModify} commentPost={this.commentPost}/>
         <CommentList blogPost={this.state.blogPost}></CommentList>
         <footer></footer>
       </div>
@@ -82,6 +97,7 @@ class Post extends React.Component {
     this.handleModify = this.handleModify.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.handleLike = this.handleLike.bind(this);
     this.state = {comment: ''};
   }
 
@@ -92,6 +108,12 @@ class Post extends React.Component {
   handleModify() {
     this.props.onModify(this.props.blogPost);
   }
+
+	handleLike() {
+		this.props.blogPost.likes += 1;
+		this.forceUpdate();
+		this.props.onLike(this.props.blogPost);
+	}
 
   handleComment(e) {
     e.preventDefault();
@@ -122,13 +144,14 @@ class Post extends React.Component {
         <p className="author" >- {this.props.blogPost.author} {this.props.blogPost.createDate}</p>
         <button onClick={this.handleDelete}>Delete</button>
         <button onClick={this.handleModify}>Modify</button>
+	      <div className="like"> <p>{this.props.blogPost.likes}</p> <button onClick={this.handleLike}>Like</button></div>
         <h4>Add Comment</h4>
         <form onSubmit={this.handleComment}>
 	        <p>name:</p>
 	        <input name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>
 	        <p>comment:</p>
           <textarea className="commentTextArea" rows="4" name='comment' value={this.state.comment} onChange={e => this.handleChange(e)}/>
-          <button className="submitButton" type='Submit'>save</button>
+          <button className="submitButton" type='Submit'>Comment</button>
         </form>
       </div>
     )

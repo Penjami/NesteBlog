@@ -13,11 +13,30 @@
 
   .commentTextArea {
     resize: none;
-    width:95%;
+    width:97%;
     height:100%;
     box-sizing: border-box;         /* For IE and modern versions of Chrome */
     -moz-box-sizing: border-box;    /* For Firefox                          */
     -webkit-box-sizing: border-box; /* For Safari                           */
+  }
+
+  h2.title {
+      display: inline-block;
+  }
+
+  .like {
+      float: right;
+  }
+
+ .like button {
+     float: right;
+
+ }
+
+  .like p {
+      margin: 0px;
+      padding: 0px 8px 0px 8px;
+      float: right;
   }
 
   .submitButton {
@@ -70,11 +89,29 @@
   }
 
   .newBlogPost {
-    margin-left: 20px;
+
+      border-bottom: 2px;
+      border-left: 2px;
+      border-right: 2px;
+      border-style: solid;
+      border-color: #0E2240;
+      padding: 10px;
+      border-top: 0px;
+      width: 70%;
+      margin: auto;
   }
 
   .modifyBlogPost {
-    margin-left: 20px;
+
+      border-bottom: 2px;
+      border-left: 2px;
+      border-right: 2px;
+      border-style: solid;
+      border-color: #0E2240;
+      padding: 10px;
+      border-top: 0px;
+      width: 70%;
+      margin: auto;
   }
 
   .author {

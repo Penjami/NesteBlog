@@ -50,7 +50,7 @@ export class NewBlogPost extends  React.Component {
           <input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
           <p>content</p>
           <textarea className="commentTextArea" rows="4" cols="50" name='content' value={this.state.content} onChange={e => this.handleChange(e)}></textarea>
-          <button type='Submit'>save</button>
+          <button type='Submit'>Post</button>
         </form>
         <footer></footer>
       </div>

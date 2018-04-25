@@ -48,7 +48,7 @@ export class ModifyBlogPost extends React.Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to="/" />;
+      return <Redirect push to={`/blogposts/${this.state.id}`} />;
     }
 
     return (
@@ -56,7 +56,7 @@ export class ModifyBlogPost extends React.Component {
         <NavBar/>
         <form className="modifyBlogPost" onSubmit={this.handleBlogSubmit}>
           <p>author</p>
-          <input type='text' name='author' value={this.state.author} onChange={e => this.handleChange(e)}/>
+          <p>{this.state.author}</p>
           <p>title</p>
           <input type='text' name='title' value={this.state.title} onChange={e => this.handleChange(e)}/>
           <p>content</p>

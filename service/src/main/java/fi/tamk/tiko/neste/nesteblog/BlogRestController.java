@@ -98,6 +98,7 @@ public class BlogRestController {
         for(int i = 0; i < blogPostDetails.getComments().size(); i++) {
             newBlogPost.getComments().add(blogPostDetails.getComments().get(i));
         }
+        newBlogPost.setLikes(blogPostDetails.getLikes());
 
         return blogPostRepository.save(newBlogPost);
     }

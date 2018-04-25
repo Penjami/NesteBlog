@@ -20,7 +20,7 @@ export class Home extends React.Component {
     }).then((response) => {
       return response.json();
     }).then(response => {
-      this.setState({blogPosts: response});
+      this.setState({blogPosts: response.reverse()});
     });
   }
 
